@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-parchment text-ink font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink;
+  }
+
+  ::selection {
+    @apply bg-gold/40 text-ink;
+  }
+
+  :focus-visible {
+    outline: 2px solid #c9a24b;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Eyebrow label used above section headings */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-widest2 text-gold;
+  }
+
+  /* Scroll-reveal utility: elements start hidden and animate in via the
+     useScrollReveal hook toggling `.is-visible`. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-semibold tracking-wide transition-all duration-300 ease-premium focus-visible:outline-offset-4 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-wine text-parchment shadow-card hover:-translate-y-0.5 hover:bg-wine-light active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply btn border border-ink/15 bg-transparent text-ink hover:-translate-y-0.5 hover:border-ink/40 active:translate-y-0;
+  }
+
+  .btn-gold {
+    @apply btn bg-gold text-ink shadow-card hover:-translate-y-0.5 hover:bg-gold-light active:translate-y-0;
+  }
+
+  .btn-ghost-light {
+    @apply btn border border-parchment/30 bg-transparent text-parchment hover:-translate-y-0.5 hover:border-parchment/70 active:translate-y-0;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-ink/15 bg-parchment px-4 py-3 text-sm text-ink placeholder:text-ink/40 transition-colors focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30;
+  }
+
+  .card-surface {
+    @apply rounded-2xl border border-ink/8 bg-white/70 backdrop-blur-sm;
+  }
+}
+
+@layer utilities {
+  .marquee-track {
+    animation: marquee 32s linear infinite;
+  }
+}
